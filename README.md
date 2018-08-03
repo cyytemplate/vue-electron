@@ -10,3 +10,9 @@
 ```shell
 yarn dev
 ```
+
+## 打包
+
+```shell
+yarn bd
+```

@@ -3,12 +3,14 @@
     "version": "0.1.0",
     "description": "vue-electron-template ",
     "author": "cyy <cyy0418@qq.com>",
+    "main": "./electron/main.js",
     "scripts": {
         "dev": "node build/dev-runner",
         "start": "electron electron/main",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "bd": "yarn build && electron-builder"
     },
     "dependencies": {
         "vue": "^2.5.16",
@@ -22,6 +24,7 @@
         "@vue/eslint-config-prettier": "^3.0.0-rc.3",
         "chalk": "^2.4.1",
         "electron": "^2.0.3",
+        "electron-builder": "^20.26.1",
         "electron-devtools-installer": "^2.2.4",
         "lint-staged": "^6.0.0",
         "node-sass": "^4.9.0",
@@ -45,5 +48,41 @@
             "vue-cli-service lint",
             "git add"
         ]
+    },
+    "build": {
+        "productName": "vue-electron-template",
+        "appId": "top.alibt.eblog",
+        "directories": {
+            "output": "build/dist"
+        },
+        "files": [
+            "dist/**/*",
+            "electron/**/*"
+        ],
+        "extraResources": "public",
+        "dmg": {
+            "contents": [
+                {
+                    "x": 410,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 130,
+                    "y": 150,
+                    "type": "file"
+                }
+            ]
+        },
+        "mac": {
+            "icon": "build/icons/icon.icns"
+        },
+        "win": {
+            "icon": "build/icons/icon.ico"
+        },
+        "linux": {
+            "icon": "build/icons"
+        }
     }
 }
