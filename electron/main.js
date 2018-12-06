@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require("electron");
+const Menu = require('./lib/menu')
 const path = require("path");
 const isDev = process.env.NODE_ENV === "development";
 // Keep a global reference of the window object, if you don't, the window will
@@ -7,7 +8,7 @@ const isDev = process.env.NODE_ENV === "development";
 let mainWindow;
 let winurl = isDev
     ? "http://localhost:8080"
-    : path.join(__dirname, "../dist/index.html");
+    : "file://" + path.join(__dirname, "../dist/index.html");
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -25,13 +26,13 @@ function createWindow() {
             .catch(err => {
                 console.log("无法安装 `vue-devtools`: \n", err);
             });
+        // Open the DevTools.
+        mainWindow.webContents.openDevTools();
     }
     // and load the index.html of the app.
 
     mainWindow.loadURL(winurl);
 
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on("closed", function () {
@@ -40,6 +41,10 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+        Menu.showEditor()
+    })
 }
 
 // This method will be called when Electron has finished
