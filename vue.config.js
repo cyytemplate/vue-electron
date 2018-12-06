@@ -1,4 +1,4 @@
 module.exports = {
-  // options...
-  baseUrl: ""
+    // options...
+    baseUrl: ""
 };

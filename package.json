@@ -31,6 +31,7 @@
         "electron-builder": "^20.38.2",
         "electron-devtools-installer": "^2.2.4"
     },
+    "license": "MIT",
     "browserslist": [
         "> 1%",
         "last 2 versions",
