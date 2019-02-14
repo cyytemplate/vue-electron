@@ -18,17 +18,6 @@ function createWindow() {
         // transparent: true
     });
 
-    if (isDev) {
-        let installExtension = require("electron-devtools-installer");
-        installExtension
-            .default(installExtension.VUEJS_DEVTOOLS)
-            .then(() => { })
-            .catch(err => {
-                console.log("无法安装 `vue-devtools`: \n", err);
-            });
-        // Open the DevTools.
-        mainWindow.webContents.openDevTools();
-    }
     // and load the index.html of the app.
 
     mainWindow.loadURL(winurl);
@@ -44,6 +33,17 @@ function createWindow() {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
         Menu.showEditor()
+        if (isDev) {
+            let installExtension = require("electron-devtools-installer");
+            installExtension
+                .default(installExtension.VUEJS_DEVTOOLS)
+                .then(() => { })
+                .catch(err => {
+                    console.log("无法安装 `vue-devtools`: \n", err);
+                });
+            // Open the DevTools.
+            mainWindow.webContents.openDevTools();
+        }
     })
 }
 
