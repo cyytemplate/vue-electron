@@ -15,7 +15,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 780,
-    titleBarStyle: 'hidden'
+    titleBarStyle: 'hidden',
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true
+    }
     // frame: false
     // transparent: true
   })

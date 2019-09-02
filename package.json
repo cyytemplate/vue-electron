@@ -6,7 +6,7 @@
   "main": "./app/main.js",
   "scripts": {
     "dev": "node build/dev-runner",
-    "start": "electron electron/main",
+    "start": "electron app/main",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
