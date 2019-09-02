@@ -1,6 +1,7 @@
 <template>
     <div class="home">
         <img src="../assets/logo.png">
+        <HelloWorld></HelloWorld>
     </div>
 </template>
 
@@ -9,9 +10,9 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-    name: 'home',
-    components: {
-        HelloWorld
-    }
+  name: 'home',
+  components: {
+    HelloWorld
+  }
 }
 </script>

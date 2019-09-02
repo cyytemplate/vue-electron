@@ -1,4 +1,7 @@
 module.exports = {
-    // options...
-    baseUrl: ""
-};
+  // options...
+  publicPath: '',
+  devServer: {
+    port: 8088 // 端口
+  }
+}
