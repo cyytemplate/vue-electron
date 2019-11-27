@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV === 'development'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-let winurl = isDev
+const winurl = isDev
   ? 'http://localhost:8088'
   : 'file://' + path.join(__dirname, '../dist/index.html')
 function createWindow () {
