@@ -14,6 +14,10 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 780,
+    center: true,
+    transparent: true,
+    vibrancy: 'appearance-based', // mac OS 支持，外观配置深色或浅色
+    frame: false,
     titleBarStyle: 'hidden',
     webPreferences: {
       webSecurity: false,
