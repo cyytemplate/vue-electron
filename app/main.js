@@ -3,14 +3,13 @@ const { app, BrowserWindow } = require('electron')
 const Menu = require('./lib/menu')
 const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 const winurl = isDev
   ? 'http://localhost:8088'
   : 'file://' + path.join(__dirname, '../dist/index.html')
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -38,12 +37,11 @@ function createWindow () {
 
   if (isDev) {
     let installExtension = require('electron-devtools-installer')
-    installExtension
-      .default(installExtension.VUEJS_DEVTOOLS)
-      .then(() => { })
-      .catch(err => {
-        console.log('无法安装 `vue-devtools`: \n', err)
-      })
+    app.whenReady().then(() => {
+      installExtension.default(installExtension.VUEJS_DEVTOOLS)
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err))
+    })
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
   }

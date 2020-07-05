@@ -5,6 +5,17 @@ const path = require('path')
 const fs = require('fs')
 const Service = require('@vue/cli-service/lib/Service')
 const service = new Service(process.cwd())
+// 日志打印
+const Log = {
+  error (data) {
+    let str = data.toString()
+    console.log(chalk.red(str))
+  },
+  success (data) {
+    let str = data.toString()
+    console.log(chalk.green(str))
+  }
+}
 
 let electronProcess = null
 let electronRestart = false
@@ -24,9 +35,9 @@ function watchFile () {
         process.kill(electronProcess.pid)
       }
       electronProcess = null
-      console.log(chalk.green(eventType + ':' + filename))
+      Log.success(eventType + ':' + filename)
       startElectron()
-      console.log(chalk.green('app restart'))
+      Log.success('app restart')
       setTimeout(() => {
         electronRestart = false
       }, 5000)
@@ -36,7 +47,7 @@ function watchFile () {
 
 function startVue () {
   return service.run('serve').catch(err => {
-    console.log(chalk.red(err))
+    Log.error(err)
     process.exit(1)
   })
 }
@@ -53,10 +64,10 @@ function startElectron () {
   )
 
   electronProcess.stdout.on('data', data => {
-    console.log(chalk.green(data.toString()))
+    Log.success(data)
   })
   electronProcess.stderr.on('data', data => {
-    console.log(chalk.red(data.toString()))
+    Log.error(data)
   })
   electronProcess.on('close', () => {
     if (!electronRestart) process.exit()
